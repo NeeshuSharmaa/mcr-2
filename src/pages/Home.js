@@ -27,7 +27,7 @@ export default function Home() {
       {habitsState.habits.length ? (
         <div className="habits-list">
           {habitsState?.habits?.map((habit) => (
-            <Habit key={habit.id} {...habit} />
+            <Habit key={habit.id} {...habit} setShowModal={setShowModal} />
           ))}
         </div>
       ) : (

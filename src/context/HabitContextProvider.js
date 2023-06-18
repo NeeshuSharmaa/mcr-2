@@ -35,10 +35,10 @@ export default function HabitContextProvider({ children }) {
       }
       case "archive": {
         const updatedHabits = state.habits.filter(
-          ({ id: ID }) => ID !== payload.id
+          ({ id: ID }) => ID !== payload
         );
         const habitToArchive = state.habits.find(
-          ({ id: ID }) => ID === payload.id
+          ({ id: ID }) => ID === payload
         );
 
         return {
@@ -47,10 +47,25 @@ export default function HabitContextProvider({ children }) {
           archivedHabits: [...state.archivedHabits, habitToArchive],
         };
       }
-      case "delete": {
-        const updatedHabits = state.habits.filter(
-          ({ id: ID }) => ID !== payload.id
+
+      case "unarchive": {
+        const updatedArchive = state.archivedHabits.filter(
+          ({ id: ID }) => ID !== payload
         );
+        const habitToAdd = state.habits.find(({ id: ID }) => ID === payload);
+        return {
+          ...state,
+          habits: [...state.habits, habitToAdd],
+          archivedHabits: updatedArchive,
+        };
+      }
+      case "delete": {
+        console.log("inside delete", payload);
+
+        const updatedHabits = state.habits.filter(
+          ({ id: ID }) => ID !== payload
+        );
+        console.log("updated", updatedHabits);
         return { ...state, habits: updatedHabits };
       }
       default: {

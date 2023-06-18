@@ -83,6 +83,19 @@ nav{
 
 .empty-habits-list{
   padding:6rem 4rem 4rem 4rem;
-  display:flex;
+  
   justify-content: center;
+  align-items:center;
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+.empty-habits-list>a>button{
+  padding:0.6rem 1rem;
+  border:2px solid rgb(25, 52, 103);
+  color:rgb(25, 52, 103);
+  background-color: white;
+  font-size:1rem;
+  box-shadow:1px 2px 3px rgb(152, 152, 152);
+  border-radius:0.2rem;
 }
