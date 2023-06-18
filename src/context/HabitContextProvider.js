@@ -34,10 +34,24 @@ export default function HabitContextProvider({ children }) {
         return {};
       }
       case "archive": {
-        return {};
+        const updatedHabits = state.habits.filter(
+          ({ id: ID }) => ID !== payload.id
+        );
+        const habitToArchive = state.habits.find(
+          ({ id: ID }) => ID === payload.id
+        );
+
+        return {
+          ...state,
+          habits: updatedHabits,
+          archivedHabits: [...state.archivedHabits, habitToArchive],
+        };
       }
       case "delete": {
-        return {};
+        const updatedHabits = state.habits.filter(
+          ({ id: ID }) => ID !== payload.id
+        );
+        return { ...state, habits: updatedHabits };
       }
       default: {
         return { habits: [], archivedHabits: [] };

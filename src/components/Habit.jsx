@@ -1,19 +1,23 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useHabitContext } from "../context/HabitContextProvider";
 
 export default function Habit({id, name, repeat, goal, date, time}) {
   const timeUnit=time>12?"PM":"AM";
   const [showHabitInfo, setShowHabitInfo]=useState(false);
+
+  const {dispatch}=useHabitContext();
+
   return (
     <div className="habit">
       <div className="habit-header">
 
       <h3 onClick={()=>setShowHabitInfo((prev)=>!prev)}>{name}</h3>
       <div className="action-btns">
-        <FontAwesomeIcon icon={faTrash} />
-        <FontAwesomeIcon icon={faPenToSquare} />
-        <span>Archive</span>
+        <FontAwesomeIcon icon={faTrash} onClick={()=>dispatch({type:"delete", payload:id})}/>
+        <FontAwesomeIcon icon={faPenToSquare} onClick={()=>dispatch({type:"edit", payload:id})}/>
+        <span onClick={()=>dispatch({type:"archive", payload:id})}>Archive</span>
 
       </div>
       
